@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battle of Souls: Vikings vs Samurai — Card Game | No Limit Games</title>
+<meta name="description" content="Battle of Souls is a player-vs-player card and board game pitting Viking warriors against Samurai warlords for control of the immortal realm. Live on Gamefound September 2026.">
+<link rel="icon" href="assets/img/logo-small.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #14110f;
+    --bg-raised: #1c1713;
+    --line: #33291f;
+    --ink: #ece4d8;
+    --ink-dim: #b0a495;
+    --muted: #766a5b;
+    --ember: #d1611f;
+    --ember-bright: #f08a3c;
+    --gold: #c9a24a;
+    --max: 72rem;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Spectral', Georgia, serif;
+    font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.brand,.status-chip,nav a,.btn{ font-family:'Oswald', 'Arial Narrow', sans-serif; }
+
+  p{ max-width:36rem; color:var(--ink-dim); }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding-left:var(--gutter); padding-right:var(--gutter); }
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ opacity:0; transform:translateY(14px); animation:reveal .9s cubic-bezier(.2,.7,.25,1) forwards; }
+    .reveal:nth-child(2){ animation-delay:.12s; }
+    .reveal:nth-child(3){ animation-delay:.24s; }
+  }
+  @keyframes reveal{ to{ opacity:1; transform:none; } }
+
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(20,17,15,.9); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:1rem; }
+  .brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; }
+  .brand img{ height:28px; width:auto; }
+  .brand-text{ font-size:.85rem; color:var(--ink-dim); letter-spacing:.03em; }
+  .header-links{ display:flex; gap:1.5rem; align-items:center; }
+  .header-links a{
+    font-size:.9rem; letter-spacing:.02em; text-decoration:none;
+    color:var(--ink-dim); border-bottom:1px solid transparent; padding-bottom:2px;
+    transition:color .15s, border-color .15s;
+  }
+  .header-links a:hover{ color:var(--ink); border-color:var(--ember); }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; padding:3.5rem 0 4rem; overflow:hidden; }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(55% 45% at 78% 6%, rgba(209,97,31,.16), transparent 60%);
+    pointer-events:none;
+  }
+  .hero .wrap{ position:relative; }
+  .eyebrow{
+    display:flex; align-items:center; gap:.75rem; color:var(--ink-dim);
+    font-size:.85rem; letter-spacing:.08em; margin-bottom:1.5rem;
+  }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--ember-bright); box-shadow:0 0 0 3px rgba(240,138,60,.2); }
+
+  .hero-art{ width:100%; border-radius:4px; margin-bottom:2rem; }
+
+  .hero-sub{ max-width:38rem; font-size:1.12rem; }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.75rem; }
+
+  .btn{
+    display:inline-block; text-decoration:none; padding:.85rem 1.6rem;
+    font-size:.95rem; letter-spacing:.03em; border:1px solid transparent;
+    border-radius:2px; transition:background .15s, color .15s, border-color .15s;
+  }
+  .btn-primary{ background:var(--ember); color:#fff; }
+  .btn-primary:hover{ background:var(--ember-bright); }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--ink-dim); }
+
+  .jagged{ display:block; width:100%; height:24px; fill:var(--bg-raised); }
+
+  /* ---------- lore ---------- */
+  .lore{ background:var(--bg-raised); padding:4rem 0; }
+  .lore h2{ font-size:1.6rem; margin-top:0; }
+  .lore .wrap{ max-width:44rem; }
+
+  /* ---------- roster / card gallery ---------- */
+  .roster{ padding:5rem 0; }
+  .roster-head{ margin-bottom:2.5rem; max-width:40rem; }
+  .roster-head h2{ font-size:2rem; margin:0 0 .6rem; }
+
+  .card-grid{
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:1.25rem;
+  }
+  @media (max-width:900px){ .card-grid{ grid-template-columns:repeat(3, 1fr); } }
+  @media (max-width:560px){ .card-grid{ grid-template-columns:repeat(2, 1fr); } }
+
+  .card-tile{ text-align:center; }
+  .card-tile img{
+    border-radius:4px; border:1px solid var(--line);
+    transition:transform .2s, border-color .2s;
+  }
+  .card-tile:hover img{ transform:translateY(-4px); border-color:var(--ember); }
+  .card-tile .card-name{ margin-top:.6rem; font-size:.85rem; letter-spacing:.02em; color:var(--ink); }
+  .card-tile .card-role{ font-size:.75rem; color:var(--muted); }
+
+  /* ---------- how to play ---------- */
+  .how{ background:var(--bg-raised); padding:5rem 0; }
+  .how-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem; margin-top:2.5rem; }
+  @media (max-width:760px){ .how-grid{ grid-template-columns:1fr; } }
+  .how h2{ font-size:2rem; margin:0; max-width:38rem; }
+  .how-item{ border-top:1px solid var(--line); padding-top:1.25rem; }
+  .how-item .num{ font-family:'Oswald'; color:var(--gold); font-size:1.4rem; font-weight:600; }
+  .how-item h3{ margin:.4rem 0 .5rem; font-size:1.1rem; }
+  .how-item p{ margin:0; font-size:.95rem; }
+
+  /* ---------- factions ---------- */
+  .factions{ padding:5rem 0; }
+  .faction-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem; }
+  @media (max-width:700px){ .faction-grid{ grid-template-columns:1fr; } }
+  .faction-card{ border:1px solid var(--line); border-radius:4px; padding:2rem; }
+  .faction-card h3{ margin:0 0 .5rem; font-size:1.4rem; }
+  .faction-card.samurai h3{ color:var(--gold); }
+  .faction-card.viking h3{ color:#8fa6b8; }
+  .faction-card p{ margin:0; }
+
+  /* ---------- cta ---------- */
+  .cta-strip{
+    background:linear-gradient(100deg, #241417, #1b1720 55%, #17161d);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:3rem 0;
+  }
+  .cta-strip .wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.5rem; }
+  .cta-strip h3{ margin:0 0 .3rem; font-size:1.5rem; }
+  .cta-strip p{ margin:0; }
+
+  footer{ padding:2rem 0; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+  footer .wrap{ display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; }
+  footer a{ text-decoration:underline; }
+
+  ::selection{ background:var(--ember); color:#fff; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--ember-bright); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="../" class="brand">
+      <img src="assets/img/logo-small.png" alt="Battle of Souls">
+      <span class="brand-text">No Limit Games</span>
+    </a>
+    <div class="header-links">
+      <a href="../bosdb/">Deckbuilder</a>
+      <a href="#roster">The Roster</a>
+      <a href="#">Gamefound ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span> Live on Gamefound · September 2026</div>
+      <img class="hero-art reveal" src="assets/img/hero-key-art.webp" alt="Battle of Souls: Vikings vs Samurai">
+      <p class="hero-sub reveal">
+        You are an Immortal — ancient as Earth itself. Summon
+        history's greatest warriors, Viking and Samurai alike,
+        back to the field to drain your rival's soul power and
+        claim the throne of the immortal realm. Mercy costs you
+        the game.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="#roster" class="btn btn-primary">Meet the roster</a>
+        <a href="#" class="btn btn-ghost">Back the campaign</a>
+      </div>
+    </div>
+    <svg class="jagged" viewBox="0 0 1200 24" preserveAspectRatio="none">
+      <polygon points="0,24 0,12 70,18 150,6 240,16 330,4 420,14 510,2 600,12
+        690,4 780,14 870,2 960,12 1050,4 1140,14 1200,6 1200,24"/>
+    </svg>
+  </section>
+
+  <section class="lore">
+    <div class="wrap">
+      <h2>The immortal plane doesn't run out of dead.</h2>
+      <p>
+        You are one of the Immortals, a race as old as Earth
+        itself, who have watched every war the world has ever
+        fought. Now the Battle of Souls has begun — a tournament
+        to crown a new king of the immortal realm. Summon history's
+        warriors back from the earth, Samurai and Vikings among
+        them, and send them to battle once more. Drain your rival
+        immortal's soul power, and the throne is yours.
+      </p>
+    </div>
+  </section>
+
+  <section class="roster" id="roster">
+    <div class="wrap">
+      <div class="roster-head">
+        <h2>A few faces from the field</h2>
+        <p>Every fighter carries their own stats and abilities —
+        warlords who turn the tide of a match, warriors built for
+        the front line, and equipment that changes the fight
+        outright.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card-tile">
+          <img src="assets/img/card-back.webp" alt="Battle of Souls card back" loading="lazy">
+          <div class="card-name">Card Back</div>
+          <div class="card-role">Every deck</div>
+        </div>
+        <div class="card-tile">
+          <img src="assets/img/card-nakajima.jpg" alt="Nakajima Yorisada card" loading="lazy">
+          <div class="card-name">Nakajima Yorisada</div>
+          <div class="card-role">Warlord · Samurai</div>
+        </div>
+        <div class="card-tile">
+          <img src="assets/img/card-inaba.jpg" alt="Inaba Ieyasu card" loading="lazy">
+          <div class="card-name">Inaba Ieyasu</div>
+          <div class="card-role">Warlord · Samurai</div>
+        </div>
+        <div class="card-tile">
+          <img src="assets/img/card-matilda.jpg" alt="Matilda card" loading="lazy">
+          <div class="card-name">Matilda</div>
+          <div class="card-role">Warrior · Viking</div>
+        </div>
+        <div class="card-tile">
+          <img src="assets/img/card-grasioa.jpg" alt="Grasioa Spear card" loading="lazy">
+          <div class="card-name">Grasioa Spear</div>
+          <div class="card-role">Equipment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="wrap">
+      <h2>How a turn unfolds</h2>
+      <div class="how-grid">
+        <div class="how-item">
+          <span class="num">01</span>
+          <h3>Deploy your fighters</h3>
+          <p>Bring Warlords and Warriors onto the field, each
+          carrying their own ATK and DEF. Some abilities only
+          trigger the moment they're deployed.</p>
+        </div>
+        <div class="how-item">
+          <span class="num">02</span>
+          <h3>Equip and support</h3>
+          <p>Equipment and effect cards can swing a fight mid-battle
+          — reducing an opponent's attack, protecting your line, or
+          setting up your next move.</p>
+        </div>
+        <div class="how-item">
+          <span class="num">03</span>
+          <h3>Claim the souls</h3>
+          <p>Win the exchange and take control of the field. Hold
+          more souls than your opponent when the fighting ends, and
+          the realm is yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="factions">
+    <div class="wrap">
+      <div class="roster-head">
+        <h2>Two histories, one battlefield</h2>
+        <p>Build your side of the war from two very different
+        traditions of combat.</p>
+      </div>
+      <div class="faction-grid">
+        <div class="faction-card samurai">
+          <h3>Samurai</h3>
+          <p>Disciplined warlords who bend the field to their will —
+          commanding tribute, seizing cards from an opponent's hand,
+          and turning honor into raw battlefield control.</p>
+        </div>
+        <div class="faction-card viking">
+          <h3>Vikings</h3>
+          <p>Warriors built for momentum and resourcefulness,
+          trading their own strength on the field for the cards and
+          battlefields they need to win.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="factions">
+    <div class="wrap">
+      <div class="roster-head">
+        <h2>The realm keeps growing</h2>
+        <p>Samurai and Vikings are just the opening battle. More
+        warrior traditions from across history are already on
+        the way.</p>
+      </div>
+      <div class="faction-grid">
+        <div class="faction-card samurai">
+          <h3>Spartan</h3>
+          <p>In production now — the next tradition of warriors
+          set to enter the realm.</p>
+        </div>
+        <div class="faction-card viking">
+          <h3>Aztec</h3>
+          <p>Also in production alongside the Spartans, bringing
+          Jaguar and Eagle warriors to the field.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="wrap">
+      <div>
+        <h3>Back Battle of Souls on Gamefound</h3>
+        <p>Live now through September 2026 — get in early.</p>
+      </div>
+      <a href="#" class="btn btn-primary">View the campaign</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 No Limit Games. Battle of Souls and all related marks are property of No Limit Games. Card art by Alicia Roberts.</span>
+    <span><a href="../">soulsbattle.com</a> · <a href="https://nolimitgamez.com">nolimitgamez.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
